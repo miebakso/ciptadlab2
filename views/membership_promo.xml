@@ -1,0 +1,17 @@
+<openerp>
+	<data>
+
+<!-- VOUCHER SETTING ============================================================================================================ -->
+
+		<record id="membership_point_voucher_setting_form" model="ir.ui.view">
+			<field name="name">membership.point.voucher.setting.form</field>
+			<field name="model">membership.point.voucher.setting</field>
+			<field name="inherit_id" ref="membership_point.membership_point_voucher_setting_form"/>
+			<field name="arch" type="xml">
+				<field position="before" name="name">
+					<field name="voucher_prefix" />
+				</field>
+			</field>
+		</record>
+	</data>
+</openerp>
