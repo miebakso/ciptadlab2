@@ -27,11 +27,11 @@ class membership_point_voucher(models.Model):
 		year = datetime.datetime.now().strftime("%Y")
 		voucher_prefix = ('%s%s' % (voucher_prefix, year))
 
-		latest_voucher = self.search([('number', 'like', voucher_prefix)], order="number DESC", limit=1)
+		latest_voucher = self.search([('name', 'like', voucher_prefix)], order="name DESC", limit=1)
 		if len(latest_voucher) == 0:
 			new_number = "%s00000001" % voucher_prefix
 		else:
-			latest_voucher = latest_voucher.number[8:]
+			latest_voucher = latest_voucher.name[8:]
 			new_number = "%s%08d" % (voucher_prefix, int(latest_voucher)+1)
 
 		return new_number

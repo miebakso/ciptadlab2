@@ -1,0 +1,334 @@
+
+<openerp>
+	<data>
+		<!-- Index =================================================================================================================== -->
+		<template id="index">
+			<t t-call="website.layout">
+				<div id="wrap" class="wrap_bg">
+					<title>Academy</title>
+
+					<!-- Modal Login -->
+					<div class="modal fade" id="login-modal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true" style="display: none;">
+						<div class="modal-dialog">
+							<div class="modal-content">
+								<div class="modal-header" align="center">
+									<button type="button" class="close" data-dismiss="modal" aria-label="Close">
+										<span class="glyphicon glyphicon-remove" aria-hidden="true"></span>
+									</button>
+								</div>
+
+								<!-- Begin # DIV Form -->
+								<div id="div-forms">
+									<!-- Begin # Login Form -->
+									<form id="login-form" action="/home/login">
+										<div class="modal-body">
+											<div id="div-login-msg">
+												<div id="icon-login-msg" class="glyphicon glyphicon-chevron-right"></div>
+												<span id="text-login-msg">Type your username and password.</span>
+										</div>
+											<input id="login_username" class="form-control" type="text" placeholder="Username (type ERROR for error effect)" required="True" name="userid" />
+								    		<input id="login_password" class="form-control" type="password" placeholder="Password" required="True"  name="pass" />
+				 								<div class="checkbox">
+				                                <label>
+				                                    <input type="checkbox"> Remember me </input>
+				                                </label>
+				                            </div>
+				        		    	</div>
+								        <div class="modal-footer">
+				                            <div>
+				                                <button type="submit" class="btn btn-primary btn-lg btn-block">Login</button>
+				                            </div>
+								        </div>
+				                    </form>
+				                    <!-- End # Login Form -->
+				                </div>
+				                <!-- End # DIV Form -->
+							</div>
+						</div>
+					</div>
+					<div class="col-md-12 col-centered">
+						<button class="btn btn-success" >
+							<a href="/home/">Login</a> 
+						</button>
+					</div>
+				</div>
+			</t>
+		</template>
+		<!-- Home =================================================================================================================== -->
+
+		<template id="home">
+			<t t-call="website.layout">
+				<div id="wrap" class="wrap_bg">
+					<nav class="navbar navbar-default">
+						<div class="container-fluid">
+						<!-- Brand and toggle get grouped for better mobile display -->
+							<div class="navbar-header">
+								<button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1" aria-expanded="false">
+									<span class="sr-only">Toggle navigation</span>
+									<span class="icon-bar"></span>
+									<span class="icon-bar"></span>
+								</button>
+								<a class="navbar-brand" href=".home/">CIPTADLAB</a>
+							</div>
+
+							<!-- Collect the nav links, forms, and other content for toggling -->
+							<div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+								<ul class="nav navbar-nav">
+									<li ><a href="/vouchers/">Vouchers<span class="sr-only">(current)</span></a></li>
+									<li ><a href="/mypurchases/">My Purchases</a></li>
+									<li><a href="/index/">Logout</a></li>
+								</ul>
+
+							</div><!-- /.navbar-collapse -->
+						</div><!-- /.container-fluid -->
+					</nav>
+				</div>
+			</t>
+		</template>
+
+		<!-- Vouchers =================================================================================================================== -->
+
+		<template id="vouchers">
+			<t t-call="website.layout">
+				<div id="wrap" class="wrap_bg">
+					<nav class="navbar navbar-default">
+						<div class="container-fluid">
+						<!-- Brand and toggle get grouped for better mobile display -->
+							<div class="navbar-header">
+								<button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1" aria-expanded="false">
+									<span class="sr-only">Toggle navigation</span>
+									<span class="icon-bar"></span>
+									<span class="icon-bar"></span>
+								</button>
+								<a class="navbar-brand" href="/home/">CIPTADLAB</a>
+							</div>
+
+							<!-- Collect the nav links, forms, and other content for toggling -->
+							<div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+								<ul class="nav navbar-nav">
+									<li class="active"><a href="/vouchers/">Vouchers<span class="sr-only">(current)</span></a></li>
+									<li><a href="/mypurchases/">My Purchases</a></li>
+									<li><a href="/index/" >Logout</a></li>
+								</ul>
+
+							</div><!-- /.navbar-collapse -->
+						</div><!-- /.container-fluid -->
+					</nav>
+					<t t-if="uid==none"> 
+						<h1>TIDAK MEMPUNYAI UID</h1>
+					</t>
+					<t t-if="uid!=none"  >
+						
+					</t>
+					<t t-foreach="vouchers" t-as="voucher">
+						<div class="row ">
+							<div class="col-md-2"></div>
+							<div class="col-md-8 ">
+								<div class="panel panel-primary">
+									<div class="panel-heading">
+										<t t-esc="voucher.name" />
+									</div>
+									<div class="panel-body">
+										<div class="col-md-2">
+											<img t-attf-src="data:image/*;base64,{{voucher.thumbnail}}" />
+										</div>
+										<div class="col-md-10">
+											<div class="col-md-3">
+												<b>Name</b>
+											</div>
+											<div class="col-md-9">
+												<t t-esc="voucher.name" />
+											</div>
+											<div class="col-md-3">
+												<b>Description</b>
+											</div>
+											<div class="col-md-9">
+												<t t-esc="voucher.description" />
+											</div>
+											<div class="col-md-3">
+												<b>Point Price</b>
+											</div>
+											<div class="col-md-9">
+												<t t-esc="voucher.point_price" />
+											</div>
+											<center>
+												<a t-attf-href="/vouchers/detail/{{voucher.id}}" t-attf-class="btn btn-success btn-sm active" t-attf-role="button">Details</a>
+											</center>
+										</div>
+									</div>
+								</div>
+							</div>
+						</div>
+					</t>
+				</div>
+			</t>
+		</template>
+
+		<!-- Details Vouchers =================================================================================================================== -->
+
+		<template id="detail">
+			<t t-call="website.layout">
+				<div id="wrap" class="wrap_bg">
+					<nav class="navbar navbar-default">
+						<div class="container-fluid">
+						<!-- Brand and toggle get grouped for better mobile display -->
+							<div class="navbar-header">
+								<button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1" aria-expanded="false">
+									<span class="sr-only">Toggle navigation</span>
+									<span class="icon-bar"></span>
+									<span class="icon-bar"></span>
+								</button>
+								<a class="navbar-brand" href="/home/">CIPTADLAB</a>
+							</div>
+
+							<!-- Collect the nav links, forms, and other content for toggling -->
+							<div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+								<ul class="nav navbar-nav">
+									<li class="active"><a href="/vouchers/">Vouchers<span class="sr-only">(current)</span></a></li>
+									<li><a href="/mypurchases/">My Purchases</a></li>
+									<li><a href="/index/" >Logout</a></li>
+								</ul>
+
+							</div><!-- /.navbar-collapse -->
+						</div><!-- /.container-fluid -->
+					</nav>
+
+					<t t-foreach="vouchers" t-as="voucher">
+						<div t-if="voucher.id == id">
+							<div class="row ">
+								<div class="col-md-12 ">
+									<div class="panel panel-primary">
+									<div class="panel-heading">
+										<t t-esc="voucher.name" />
+									</div>
+									<div class="panel-body">
+										<div class="col-md-6" >
+											<img t-attf-src="data:image/*;base64,{{voucher.voucher_image}}" style="background-size : contain;"  />
+										</div>
+										<div class="col-md-6">
+											<div class="row">
+												<div class="col-md-3">
+													<b>Name</b>
+												</div>
+												<div class="col-md-9">
+													<t t-esc="voucher.name" />
+												</div>
+											</div>
+											<div class="row">
+												<div class="col-md-3">
+													<b>Description</b>
+												</div>
+												<div class="col-md-9">
+													<t t-esc="voucher.description" />
+												</div>
+											</div>
+											<div class="row">
+												<div class="col-md-3">
+													<b>Point Price</b>
+												</div>
+												<div class="col-md-9">
+													<t t-esc="voucher.point_price" />
+												</div>
+											</div>
+											<div class="row">
+												<div class="col-md-3">
+													<b>Term and Condition</b>
+												</div>
+												<div class="col-md-9">
+													<span><t t-esc="voucher.terms_and_conditions" /></span>
+												</div>
+											</div>
+											<div t-if="voucher.expired_month">
+												<div class="row">
+													<div class="col-md-3">
+														<b>Expired in </b>
+													</div>
+													<div class="col-md-9">
+														<t t-esc="voucher.expired_month" /><span> month</span>
+													</div>
+												</div>										
+											</div>
+											<div t-if="voucher.expired_date">
+												<div class="row">
+													<div class="col-md-3">
+														<b>Expire Date</b>
+													</div>
+													<div class="col-md-9">
+														<t t-esc="voucher.expired_date" />
+													</div>
+												</div>	
+											</div>
+											<div class="row">
+												<div class="col-md-3">
+													<b>Valid for</b>
+												</div>
+												<div class="col-md-9">
+													<t t-foreach="voucher.member_level_ids" t-as="x">
+														<div class="row">
+															<t  t-esc="x.name"  />
+														</div>
+													</t>
+												</div>
+											</div>											
+											<form class="form-horizontal" method="post" action="/vouchers/purchase">
+												<div class="row">
+													<div class="form-group">
+														<label for="name" class="col-sm-2 control-label">Qty</label>
+														<div class="col-md-2">
+															<input type="number" value="1" class="form-control" min="1" name="qty" required="true" />
+														</div>
+													</div>
+												</div>
+												<div class="row">
+													<div class="col-md-12">
+														<button type="submit" class="btn btn-success">Purchase</button>
+													</div>
+												</div>	
+											</form>	
+										</div>
+									</div>
+								</div>
+							</div>
+						</div>
+						</div>
+					</t>
+				</div>
+			</t>
+		</template>
+	
+	
+
+
+		<!-- My Purchases =================================================================================================================== -->
+
+		<template id="mypurchases">
+			<t t-call="website.layout">
+				<div id="wrap" class="wrap_bg">
+					<nav class="navbar navbar-default">
+						<div class="container-fluid">
+						<!-- Brand and toggle get grouped for better mobile display -->
+							<div class="navbar-header">
+								<button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1" aria-expanded="false">
+									<span class="sr-only">Toggle navigation</span>
+									<span class="icon-bar"></span>
+									<span class="icon-bar"></span>
+								</button>
+								<a class="navbar-brand" href="#">CIPTADLAB</a>
+							</div>
+
+							<!-- Collect the nav links, forms, and other content for toggling -->
+							<div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+								<ul class="nav navbar-nav">
+									<li ><a href="/vouchers/">Vouchers<span class="sr-only">(current)</span></a></li>
+									<li class="active"><a href="/mypurchases/">My Purchases</a></li>
+									<li><a href="/index/">Logout</a></li>
+								</ul>
+
+							</div><!-- /.navbar-collapse -->
+						</div><!-- /.container-fluid -->
+					</nav>
+				</div>
+			</t>
+		</template>
+	</data>
+</openerp>

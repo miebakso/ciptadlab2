@@ -16,10 +16,12 @@
 	'depends': [
 		'base','board','web','report_webkit','account_accountant','stock',
 		'membership_point',
+		'website',
 	],
 	'data': [
 		'views/membership_point.xml',
 		'views/membership_promo.xml',
+		'views/templates.xml',
 	],
 	'demo': [
 	],
