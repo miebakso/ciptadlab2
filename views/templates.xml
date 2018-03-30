@@ -76,7 +76,6 @@
 								<ul class="nav navbar-nav">
 									<li ><a href="/vouchers/">Vouchers<span class="sr-only">(current)</span></a></li>
 									<li ><a href="/mypurchases/">My Purchases</a></li>
-									<li><a href="/index/">Logout</a></li>
 								</ul>
 
 							</div><!-- /.navbar-collapse -->
@@ -108,7 +107,6 @@
 								<ul class="nav navbar-nav">
 									<li class="active"><a href="/vouchers/">Vouchers<span class="sr-only">(current)</span></a></li>
 									<li><a href="/mypurchases/">My Purchases</a></li>
-									<li><a href="/index/" >Logout</a></li>
 								</ul>
 
 							</div><!-- /.navbar-collapse -->
@@ -122,38 +120,47 @@
 					</t>
 					<t t-foreach="vouchers" t-as="voucher">
 						<div class="row ">
-							<div class="col-md-2"></div>
-							<div class="col-md-8 ">
+							<div class="col-md-8 col-md-offset-2 col-sm-10 col-sm-offset-1 col-xs-10 col-xs-offset-1">
 								<div class="panel panel-primary">
 									<div class="panel-heading">
 										<t t-esc="voucher.name" />
 									</div>
 									<div class="panel-body">
-										<div class="col-md-2">
-											<img t-attf-src="data:image/*;base64,{{voucher.thumbnail}}" />
+										<div class="row">
+											<div class="col-md-3 col-xs-4 col-sm-4">
+												<center>	
+													<img t-attf-src="data:image/*;base64,{{voucher.thumbnail}}" />
+												</center>
+											</div>
+											<div class="col-md-9 col-xs-8 col-sm-4">
+												<div class="row">	
+													<div class="col-md-3 col-xs-12 col-sm-12">
+														<b>Name</b>
+													</div>
+													<div class="col-md-9 col-xs-12 col-sm 12">
+														<t t-esc="voucher.name" />
+													</div>
+													<div class="col-md-3 col-xs-12 col-sm 12">
+														<b>Description</b>
+													</div>
+													<div class="col-md-9 col-xs-12 col-sm 12">
+														<t t-esc="voucher.description" />
+													</div>
+													<div class="col-md-3 col-xs-12 col-sm 12">
+														<b>Point Price</b>
+													</div>
+													<div class="col-md-9 col-xs-12 col-sm 12">
+														<t t-esc="voucher.point_price" />
+													</div>
+												</div>
+											</div>
 										</div>
-										<div class="col-md-10">
-											<div class="col-md-3">
-												<b>Name</b>
+										<div class="row">
+											<div class="col-md-12">		
+												<center>
+													<a t-attf-href="/vouchers/detail/{{voucher.id}}" t-attf-class="btn btn-success btn-sm active" t-attf-role="button">Details</a>
+												</center>
 											</div>
-											<div class="col-md-9">
-												<t t-esc="voucher.name" />
-											</div>
-											<div class="col-md-3">
-												<b>Description</b>
-											</div>
-											<div class="col-md-9">
-												<t t-esc="voucher.description" />
-											</div>
-											<div class="col-md-3">
-												<b>Point Price</b>
-											</div>
-											<div class="col-md-9">
-												<t t-esc="voucher.point_price" />
-											</div>
-											<center>
-												<a t-attf-href="/vouchers/detail/{{voucher.id}}" t-attf-class="btn btn-success btn-sm active" t-attf-role="button">Details</a>
-											</center>
 										</div>
 									</div>
 								</div>
@@ -186,26 +193,27 @@
 								<ul class="nav navbar-nav">
 									<li class="active"><a href="/vouchers/">Vouchers<span class="sr-only">(current)</span></a></li>
 									<li><a href="/mypurchases/">My Purchases</a></li>
-									<li><a href="/index/" >Logout</a></li>
 								</ul>
 
 							</div><!-- /.navbar-collapse -->
 						</div><!-- /.container-fluid -->
 					</nav>
-
+					<h1>
+						xxxxxxxx<t t-esc="id_member.name" />
+					</h1>
 					<t t-foreach="vouchers" t-as="voucher">
 						<div t-if="voucher.id == id">
 							<div class="row ">
-								<div class="col-md-12 ">
+								<div class="col-md-12 col-xs-12 col-sm-12">
 									<div class="panel panel-primary">
 									<div class="panel-heading">
 										<t t-esc="voucher.name" />
 									</div>
 									<div class="panel-body">
-										<div class="col-md-6" >
-											<img t-attf-src="data:image/*;base64,{{voucher.voucher_image}}" style="background-size : contain;"  />
+										<div class="col-md-6 col-xs-12 col-sm-12" >
+											<img t-attf-src="data:image/*;base64,{{voucher.voucher_image}}" style="width : 100% ;"  />
 										</div>
-										<div class="col-md-6">
+										<div class="col-md-6 col-xs-12 col-sm-12">
 											<div class="row">
 												<div class="col-md-3">
 													<b>Name</b>
@@ -264,32 +272,35 @@
 												</div>
 												<div class="col-md-9">
 													<t t-foreach="voucher.member_level_ids" t-as="x">
-														<div class="row">
-															<t  t-esc="x.name"  />
-														</div>
+														<t  t-esc="x.name"  /><br/>
 													</t>
 												</div>
-											</div>											
-											<form class="form-horizontal" method="post" action="/vouchers/purchase">
-												<div class="row">
+											</div>
+											<form class="form-horizontal" method="post" action="/vouchers/purchase/">
+												<div class="row">	
 													<div class="form-group">
-														<label for="name" class="col-sm-2 control-label">Qty</label>
-														<div class="col-md-2">
+														<div class="col-md-3">	
+															<label for="name" >Qty</label>
+														</div>
+														<div class="col-md-3 col-sm-6 col-xs-9">	
 															<input type="number" value="1" class="form-control" min="1" name="qty" required="true" />
 														</div>
 													</div>
 												</div>
+												<input t-attf-value="{{voucher.id}}" name="voucher_id" type="hidden" />
+
 												<div class="row">
-													<div class="col-md-12">
-														<button type="submit" class="btn btn-success">Purchase</button>
+													<div class="col-md-12">	
+														<button type="submit" class="btn btn-success">Purchase</button>			
 													</div>
-												</div>	
-											</form>	
+												</div>								
+											</form>
+											</div>	
 										</div>
 									</div>
 								</div>
 							</div>
-						</div>
+						
 						</div>
 					</t>
 				</div>
@@ -321,7 +332,6 @@
 								<ul class="nav navbar-nav">
 									<li ><a href="/vouchers/">Vouchers<span class="sr-only">(current)</span></a></li>
 									<li class="active"><a href="/mypurchases/">My Purchases</a></li>
-									<li><a href="/index/">Logout</a></li>
 								</ul>
 
 							</div><!-- /.navbar-collapse -->
