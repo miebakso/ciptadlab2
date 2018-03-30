@@ -199,7 +199,8 @@
 						</div><!-- /.container-fluid -->
 					</nav>
 					<h1>
-						xxxxxxxx<t t-esc="id_member.name" />
+						xxxxxxxx<t t-esc="id_x" />
+						yyyyyy 
 					</h1>
 					<t t-foreach="vouchers" t-as="voucher">
 						<div t-if="voucher.id == id">

@@ -40,12 +40,17 @@ class Academy(http.Controller):
 	def detail(self, id):
 
 		model_user = http.request.env['res.users']
+		model_member = http.request.env['membership.point.member']		
 		id_user =	model_user._uid
-		id_member = model_user.search([['id', '=', id_user]])
+		# id_member = model_user.search([['id', '=', id_user]])
+		x = model_member._uid
+		id_x = model_member.get_member_by_uid(x,x, id_user, None)
+
 		mode = http.request.env['membership.point.voucher.setting']
 		vouc = mode.search([['is_purchaseable', '=', 'True']])
 
 		return http.request.render('ciptadlab.detail', {
+			'id_x' : id_x,
 			'id_member' : id_member,
 			'id' : id,
 			'vouchers' : vouc,
